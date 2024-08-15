@@ -1,10 +1,11 @@
 using API.Data;
+using API.Interfaces;
+using API.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
 
 //Dependecy Injection
@@ -18,6 +19,15 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddCors();
+
+//JWT Inyection Service
+/* AddSingleton crea una instancia cuando se requiere, 
+   y la reutiliiza en todas las solicitudes subsiguientes.
+   Este metodo es util para items que queremos mantener en memoria o en un estado
+
+   AddScoped crea una instancia por cada solicitud HTTP,
+*/
+builder.Services.AddScoped<ITokenService, TokenService>();
 
 var app = builder.Build();
 
