@@ -1,50 +1,13 @@
-using System.Text;
-using API.Data;
-using API.Interfaces;
-using API.Services;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
+using API.Extensions;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddControllers();
-
-//Dependecy Injection
-builder.Services.AddDbContext<DataContext>(opt =>
-{
-    opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
-});
-
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-builder.Services.AddCors();
-
-//JWT Inyection Service
-/* AddSingleton crea una instancia cuando se requiere, 
-   y la reutiliiza en todas las solicitudes subsiguientes.
-   Este metodo es util para items que queremos mantener en memoria o en un estado
-
-   AddScoped crea una instancia por cada solicitud HTTP,
-*/
-builder.Services.AddScoped<ITokenService, TokenService>();
+//Los servicios se refactorizaron a ApplicationServiceExtensions.cs, para solo llamar al metodo estatico
+builder.Services.AddApplicationServices(builder.Configuration);
 
 //JwtBearer auth (Configuration authentication)
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(opt =>
-    {
-        var tokenKey = builder.Configuration["TokenKey"] ?? throw new Exception("Token Key is missing");
-        opt.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenKey)),
-            ValidateIssuer = false,
-            ValidateAudience = false
-        };
-    });
+builder.Services.AddIdentityServices(builder.Configuration);
 
 var app = builder.Build();
 
