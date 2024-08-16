@@ -1,18 +1,22 @@
-<h1>
-  {{ title }}
-</h1>
+<app-nav></app-nav>
 
-Other way to iterate data
-<ul>
-  <li *ngFor="let user of users">
-    {{ user.id}} - {{ user.userName }}
-  </li>
-</ul>
+<div>
+  <h1>
+    {{ title }}
+  </h1>
 
-<button type="button" class="btn btn-primary"
-tooltip="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
-Simple demo
-</button>
+  Other way to iterate data
+  <ul>
+    <li *ngFor="let user of users">
+      {{ user.id}} - {{ user.userName }}
+    </li>
+  </ul>
+
+  <button type="button" class="btn btn-primary"
+  tooltip="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+  Simple demo
+  </button>
+</div>
 
 <!-- <ul>
   @for (user of users; track user.id) {

@@ -1,0 +1,39 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiar bg-black">
+  <div class="container-fluid">
+    <a class="navbar-brand text-white">Dating App</a>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link text-white">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white">Lists</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white">Messages</a>
+        </li>
+      </ul>
+
+      <!-- Pasos
+      1. Crear formulario con ngForm (de la FormsModule)
+      2. Crear modelo en componente
+      3. Agregar nombre a input y Vincularlo bidireccionalmente con ngModel [()]
+      4. Evento ngSubmit para enviar el formulario y ejecutar la funcion del componente
+      -->
+
+      <form #loginForm="ngForm" (ngSubmit)="login()" class="d-flex" autocomplete="off">
+        <input
+          name="username"
+          [(ngModel)]="model.username"
+          class="form-control me-2"
+          placeholder="Username">
+
+        <input
+          name="password"
+          [(ngModel)]="model.password"
+          class="form-control me-2"
+          placeholder="Password"
+          type="password">
+        <button class="btn btn-outline-success" type="submit">Login</button>
+      </form>
+    </div>
+</nav>
