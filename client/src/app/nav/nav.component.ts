@@ -21,6 +21,14 @@ export class NavComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.getCurrentUser();
+  }
+
+  getCurrentUser() {
+    this.accountService.currentUser$.subscribe({
+      next: user => this.loggedIn = !!user, //Esto convierte nuestro objeto user en un booleano
+      error: error => console.log(error)
+    })
   }
 
   login() {
@@ -38,6 +46,7 @@ export class NavComponent implements OnInit {
   }
 
   logout() {
+    this.accountService.logout();
     this.loggedIn = false;
   }
 
