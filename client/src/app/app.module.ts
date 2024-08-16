@@ -6,6 +6,9 @@ import { AppComponent } from './app.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { NavComponent } from "./nav/nav.component";
+import { FormsModule } from '@angular/forms';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -16,7 +19,10 @@ import { NavComponent } from "./nav/nav.component";
     AppRoutingModule,
     HttpClientModule,
     TooltipModule.forRoot(),
-    NavComponent
+    NavComponent,
+    BrowserAnimationsModule,
+    FormsModule,
+    BsDropdownModule.forRoot()
 ],
   providers: [
     HttpClient

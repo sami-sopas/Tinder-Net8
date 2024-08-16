@@ -2,52 +2,47 @@
   <div class="container-fluid">
     <a class="navbar-brand text-white">Dating App</a>
 
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="loggedIn">
-        <li class="nav-item">
-          <a class="nav-link text-white">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white">Lists</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white">Messages</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" (click)="logout()">Logout</a>
-        </li>
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="loggedIn">
+      <li class="nav-item">
+        <a class="nav-link text-white">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white">Lists</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white">Messages</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" (click)="logout()">Logout</a>
+      </li>
+    </ul>
+
+    <div class="btn-group" dropdown *ngIf="loggedIn">
+      <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
+        aria-controls="dropdown-basic">
+        Welcome User <span class="caret"></span>
+      </button>
+      <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+        <li role="menuitem"><a class="dropdown-item">Edit profile</a></li>
+        <li role="menuitem"><a class="dropdown-item" (click)="logout()">Logout</a></li>
       </ul>
+    </div>
 
-      <div class="dropdown" *ngIf="loggedIn">
-        <a href="" class="dropdown-toggle text-light">Welcome user</a>
-        <div class="dropdown-menu">
-          <a href="" class="dropdown-item">Edit profile</a>
-          <a href="" class="dropdown-item" (click)="logout()">Logout</a>
-        </div>
-      </div>
-
-      <!-- Pasos
+    <!-- Pasos
       1. Crear formulario con ngForm (de la FormsModule)
       2. Crear modelo en componente
       3. Agregar nombre a input y Vincularlo bidireccionalmente con ngModel [()]
       4. Evento ngSubmit para enviar el formulario y ejecutar la funcion del componente
       -->
 
-      <form #loginForm="ngForm" (ngSubmit)="login()" class="d-flex" autocomplete="off" *ngIf="!loggedIn">
-        <input
-          name="username"
-          [(ngModel)]="model.username"
-          class="form-control me-2"
-          placeholder="Username">
+    <form #loginForm="ngForm" (ngSubmit)="login()" class="d-flex" autocomplete="off" *ngIf="!loggedIn">
+      <input name="username" [(ngModel)]="model.username" class="form-control me-2" placeholder="Username">
 
-        <input
-          name="password"
-          [(ngModel)]="model.password"
-          class="form-control me-2"
-          placeholder="Password"
-          type="password">
-        <button class="btn btn-outline-success" type="submit">Login</button>
-      </form>
-    </div>
+      <input name="password" [(ngModel)]="model.password" class="form-control me-2" placeholder="Password"
+        type="password">
+      <button class="btn btn-outline-success" type="submit">Login</button>
+    </form>
+  </div>
 
-    <p class="text-white">{{loggedIn}}</p>
+  <p class="text-white">{{loggedIn}}</p>
 </nav>
