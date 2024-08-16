@@ -1,7 +1,8 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiar bg-black">
   <div class="container-fluid">
     <a class="navbar-brand text-white">Dating App</a>
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="loggedIn">
         <li class="nav-item">
           <a class="nav-link text-white">Home</a>
         </li>
@@ -11,7 +12,18 @@
         <li class="nav-item">
           <a class="nav-link text-white">Messages</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" (click)="logout()">Logout</a>
+        </li>
       </ul>
+
+      <div class="dropdown" *ngIf="loggedIn">
+        <a href="" class="dropdown-toggle text-light">Welcome user</a>
+        <div class="dropdown-menu">
+          <a href="" class="dropdown-item">Edit profile</a>
+          <a href="" class="dropdown-item" (click)="logout()">Logout</a>
+        </div>
+      </div>
 
       <!-- Pasos
       1. Crear formulario con ngForm (de la FormsModule)
@@ -20,7 +32,7 @@
       4. Evento ngSubmit para enviar el formulario y ejecutar la funcion del componente
       -->
 
-      <form #loginForm="ngForm" (ngSubmit)="login()" class="d-flex" autocomplete="off">
+      <form #loginForm="ngForm" (ngSubmit)="login()" class="d-flex" autocomplete="off" *ngIf="!loggedIn">
         <input
           name="username"
           [(ngModel)]="model.username"
@@ -36,4 +48,6 @@
         <button class="btn btn-outline-success" type="submit">Login</button>
       </form>
     </div>
+
+    <p class="text-white">{{loggedIn}}</p>
 </nav>
