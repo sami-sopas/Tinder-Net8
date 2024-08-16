@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AccountService } from '../_services/account.service';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { Observable, of } from 'rxjs';
+import { User } from '../_models/user';
 
 @Component({
   selector: 'app-nav',
@@ -13,23 +15,16 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 })
 export class NavComponent implements OnInit {
 
-  private accountService = inject(AccountService);
+  public accountService = inject(AccountService);
 
-  loggedIn = false;
+  //currentUser$: Observable<User | null> = of(null); //el of es para inicializar el observable en nulo
 
   model: any = {};
 
   constructor() { }
 
   ngOnInit(): void {
-    this.getCurrentUser();
-  }
-
-  getCurrentUser() {
-    this.accountService.currentUser$.subscribe({
-      next: user => this.loggedIn = !!user, //Esto convierte nuestro objeto user en un booleano
-      error: error => console.log(error)
-    })
+    //this.currentUser$ = this.accountService.currentUser$;
   }
 
   login() {
@@ -38,7 +33,7 @@ export class NavComponent implements OnInit {
     this.accountService.login(this.model).subscribe({
       next: response => {
         console.log(response);
-        this.loggedIn = true;
+        //console.log(this.currentUser$);
       },
       error: error => {
         console.log(error);
@@ -48,7 +43,6 @@ export class NavComponent implements OnInit {
 
   logout() {
     this.accountService.logout();
-    this.loggedIn = false;
   }
 
 }
