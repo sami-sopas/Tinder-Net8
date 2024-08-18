@@ -5,6 +5,7 @@ import { AccountService } from '../_services/account.service';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { Observable, of } from 'rxjs';
 import { User } from '../_models/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -16,6 +17,7 @@ import { User } from '../_models/user';
 export class NavComponent implements OnInit {
 
   public accountService = inject(AccountService);
+  private router = inject(Router);
 
   //currentUser$: Observable<User | null> = of(null); //el of es para inicializar el observable en nulo
 
@@ -33,6 +35,7 @@ export class NavComponent implements OnInit {
     this.accountService.login(this.model).subscribe({
       next: response => {
         console.log(response);
+        this.router.navigateByUrl('/members');
         //console.log(this.currentUser$);
       },
       error: error => {
@@ -43,6 +46,7 @@ export class NavComponent implements OnInit {
 
   logout() {
     this.accountService.logout();
+    this.router.navigateByUrl('/');
   }
 
 }

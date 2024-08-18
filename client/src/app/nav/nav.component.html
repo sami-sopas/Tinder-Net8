@@ -1,19 +1,16 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiar bg-black">
   <div class="container-fluid">
-    <a class="navbar-brand text-white">Dating App</a>
+    <a class="navbar-brand text-white" routerLink="/">Dating App</a>
 
      <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="accountService.currentUser$ | async"> <!-- Si tiene algo diferente de null, sabemos que esta loggeado -->
       <li class="nav-item">
-        <a class="nav-link text-white">Home</a>
+        <a class="nav-link" routerLink="/members" routerLinkActive="active">Matches</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-white">Lists</a>
+        <a class="nav-link" routerLink="/lists" routerLinkActive="active">Lists</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-white">Messages</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link text-white" (click)="logout()">Logout</a>
+        <a class="nav-link" routerLink="/messages" routerLinkActive="active">Messages</a>
       </li>
     </ul>
 
