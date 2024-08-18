@@ -15,6 +15,7 @@ public class AccountController(DataContext context, ITokenService tokenService) 
     [HttpPost("register")] // api/account/register
     public async Task<ActionResult<UserDTO>> Register(RegisterDTO registerDto)
     {
+
         if (await UserExists(registerDto.Username)) return BadRequest("Username is taken");
 
         //Una vez esta clase deje de ser util, el using hara que se libere la memoria

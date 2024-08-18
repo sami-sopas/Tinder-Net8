@@ -10,5 +10,8 @@ public class RegisterDTO
     public required string Username { get; set; }
 
     [Required]
+    [StringLength(16, MinimumLength = 10)] 
     public required string Password { get; set; }
+
+
 }
