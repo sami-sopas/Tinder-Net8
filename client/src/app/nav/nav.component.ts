@@ -5,13 +5,13 @@ import { AccountService } from '../_services/account.service';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { Observable, of } from 'rxjs';
 import { User } from '../_models/user';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-nav',
   standalone: true,
-  imports: [CommonModule, FormsModule, BsDropdownModule],
+  imports: [CommonModule, FormsModule, BsDropdownModule, RouterModule],
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.css']
 })
