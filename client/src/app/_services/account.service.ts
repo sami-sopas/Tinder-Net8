@@ -11,7 +11,7 @@ export class AccountService {
 
   baseUrl = 'http://localhost:5000/api/';
 
-  private currentUserSource = new BehaviorSubject<User | null>(null); //USer | null -> User o null
+  private currentUserSource = new BehaviorSubject<User | null>(null); //User | null -> User o null
   currentUser$ = this.currentUserSource.asObservable(); //El signo $ es una convencion para indicar que es un observable
 
   //Son lo mismo este y el controctor -> private http = inject(HttpClient);
