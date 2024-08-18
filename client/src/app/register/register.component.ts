@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AccountService } from '../_services/account.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -16,7 +17,7 @@ export class RegisterComponent implements OnInit {
 
   model: any = {};
 
-  constructor(private accountService: AccountService) { }
+  constructor(private accountService: AccountService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     //console.log(this.usersFromHomeComponent);
@@ -29,8 +30,11 @@ export class RegisterComponent implements OnInit {
         console.log(response);
         this.cancel();
       },
-      error: error => console.log(error)
-    });
+      error: error => {
+        console.log(error); //TODO: no muestra el campo que tiene el error, solo registerDTO
+        this.toastr.error(error.error) //se muestra el error en un toast
+      }
+    })
   }
 
   cancel(){

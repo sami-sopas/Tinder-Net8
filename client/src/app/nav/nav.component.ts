@@ -6,6 +6,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { Observable, of } from 'rxjs';
 import { User } from '../_models/user';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-nav',
@@ -18,6 +19,7 @@ export class NavComponent implements OnInit {
 
   public accountService = inject(AccountService);
   private router = inject(Router);
+  private toastr = inject(ToastrService);
 
   //currentUser$: Observable<User | null> = of(null); //el of es para inicializar el observable en nulo
 
@@ -40,6 +42,7 @@ export class NavComponent implements OnInit {
       },
       error: error => {
         console.log(error);
+        this.toastr.error(error.error);
       }
     })
   }
