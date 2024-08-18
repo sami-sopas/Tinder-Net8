@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AccountService } from '../_services/account.service';
 import { ToastrService } from 'ngx-toastr';
+import { User } from '../_models/user';
 
 @Component({
   selector: 'app-register',
@@ -15,7 +16,10 @@ export class RegisterComponent implements OnInit {
   //Se emite el evento al componente padre para cambiar el registerMode flag (HomeComponent)
   @Output() cancelRegister = new EventEmitter(); //child to parent
 
-  model: any = {};
+  model: any = {
+    username: '',
+    password: '',
+  };
 
   constructor(private accountService: AccountService, private toastr: ToastrService) { }
 
@@ -31,6 +35,7 @@ export class RegisterComponent implements OnInit {
         this.cancel();
       },
       error: error => {
+        console.log(this.model);
         console.log(error); //TODO: no muestra el campo que tiene el error, solo registerDTO
         this.toastr.error(error.error) //se muestra el error en un toast
       }
