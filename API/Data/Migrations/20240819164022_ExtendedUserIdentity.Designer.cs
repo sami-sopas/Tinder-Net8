@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240819155222_ExtendedUserEntity")]
-    partial class ExtendedUserEntity
+    [Migration("20240819164022_ExtendedUserIdentity")]
+    partial class ExtendedUserIdentity
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -85,11 +85,9 @@ namespace API.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("PublicId")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Url")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
