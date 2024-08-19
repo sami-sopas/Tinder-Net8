@@ -21,7 +21,7 @@ public class AppUser
 
     public DateTime LastActive { get; set; } = DateTime.UtcNow;
 
-    public string Gendeer { get; set; }
+    public string Gender { get; set; }
 
     public string Interests { get; set; }
 

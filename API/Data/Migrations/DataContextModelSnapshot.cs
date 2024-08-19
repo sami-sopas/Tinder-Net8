@@ -37,7 +37,7 @@ namespace API.Data.Migrations
                     b.Property<DateOnly>("DateOfBirth")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Gendeer")
+                    b.Property<string>("Gender")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
