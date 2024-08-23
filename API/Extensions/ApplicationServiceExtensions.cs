@@ -37,6 +37,9 @@ public static class ApplicationServiceExtensions
         //Esto nos permite que nuestro repositorio pueda ser inyectado en cualquier parte de nuestra aplicacion
         services.AddScoped<IUserRepository, UserRepository>();
 
+        //Servicio para utilizar AutoMapper
+        services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
         return services;
     }
 }

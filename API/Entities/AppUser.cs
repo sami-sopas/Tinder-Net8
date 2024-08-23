@@ -34,6 +34,8 @@ public class AppUser
     
 
     //Metodo para calcular edad basado en su fecha de nacimiento
+    //AutoMapper lee este metodo y lo usuara para mapear la edad del usuario
+    //De esa manera evitamos hacer ese calculo nosotros durante el mapeo
     public int GetAge()
     {
         return DateOfBirth.CalculateAge();
