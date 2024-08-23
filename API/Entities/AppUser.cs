@@ -36,9 +36,21 @@ public class AppUser
     //Metodo para calcular edad basado en su fecha de nacimiento
     //AutoMapper lee este metodo y lo usuara para mapear la edad del usuario
     //De esa manera evitamos hacer ese calculo nosotros durante el mapeo
-    public int GetAge()
-    {
-        return DateOfBirth.CalculateAge();
-    }
+
+    /*NOTA: USAR ESTE TIPO DE METODOS HARA QUE AUTOMAPPER TENGA QUE ACCEDER A TODAS LAS PROPIEDADES
+            Y ESO HARA QUE HAGA UN SELECT DE TODAS LAS COLUMNAS AUNQUE USEMOS PROJECTION o SELECT ESPECIFICO
+    */
+    // public int GetAge()
+    // {
+    //     return DateOfBirth.CalculateAge();
+    // }
+
+    //Esto funciona???
+    // public string GetPhotoUrl()
+    // {
+    //     var mainPhoto = Photos.FirstOrDefault(x => x.IsMain);
+
+    //     return mainPhoto?.Url;
+    // }
 
 }
