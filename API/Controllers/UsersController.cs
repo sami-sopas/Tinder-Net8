@@ -1,30 +1,32 @@
 using System;
 using API.Data;
 using API.Entities;
+using API.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers;
 
+[Authorize]
 // /api/users
-public class UsersController(DataContext context) : BaseApiController
+public class UsersController(IUserRepository userRepository) : BaseApiController
 {
-    [AllowAnonymous]
+    private readonly IUserRepository _userRepository = userRepository;
+
     [HttpGet]
     public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers()
     {
-        var users = await context.Users.ToListAsync(); // Accediendo a tabla users y convirtiendo a lista
+        var users = await _userRepository.GetUsersAsync();
 
         return Ok(users);    
 
     }
 
-    [Authorize]
-    [HttpGet("{id:int}")] // /api/users/3
-    public async Task<ActionResult<AppUser>> GetUsers(int id)
+    [HttpGet("{username:string}")] // /api/users/3
+    public async Task<ActionResult<AppUser>> GetUsers(string username)
     {
-        var user = await context.Users.FindAsync(id);
+        var user = await _userRepository.GetUserByUsernameAsync(username);
 
         if(user == null) return NotFound();
 
