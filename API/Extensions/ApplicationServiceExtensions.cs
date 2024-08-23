@@ -34,6 +34,9 @@ public static class ApplicationServiceExtensions
         */
         services.AddScoped<ITokenService, TokenService>();
 
+        //Esto nos permite que nuestro repositorio pueda ser inyectado en cualquier parte de nuestra aplicacion
+        services.AddScoped<IUserRepository, UserRepository>();
+
         return services;
     }
 }
