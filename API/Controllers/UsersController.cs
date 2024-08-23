@@ -10,10 +10,9 @@ namespace API.Controllers;
 
 [Authorize]
 // /api/users
-public class UsersController(IUserRepository userRepository) : BaseApiController
+public class UsersController(DataContext context) : BaseApiController
 {
-    private readonly IUserRepository _userRepository = userRepository;
-
+    [AllowAnonymous]
     [HttpGet]
     public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers()
     {
@@ -23,8 +22,9 @@ public class UsersController(IUserRepository userRepository) : BaseApiController
 
     }
 
-    [HttpGet("{username:string}")] // /api/users/3
-    public async Task<ActionResult<AppUser>> GetUsers(string username)
+    [Authorize]
+    [HttpGet("{id:int}")] // /api/users/3
+    public async Task<ActionResult<AppUser>> GetUsers(int id)
     {
         var user = await _userRepository.GetUserByUsernameAsync(username);
 
