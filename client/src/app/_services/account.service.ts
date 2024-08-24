@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
 import { User } from '../_models/user';
+import { environment } from 'src/environments/environment.development';
 
 //Un servicio es un singleton, es decir, una sola instancia de la clase se crea y se comparte en toda la aplicación.
 @Injectable({
@@ -9,7 +10,7 @@ import { User } from '../_models/user';
 })
 export class AccountService {
 
-  baseUrl = 'http://localhost:5000/api/';
+  baseUrl = environment.apiUrl;
 
   private currentUserSource = new BehaviorSubject<User | null>(null); //User | null -> User o null
   currentUser$ = this.currentUserSource.asObservable(); //El signo $ es una convencion para indicar que es un observable
