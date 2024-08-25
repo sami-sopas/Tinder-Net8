@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Member } from 'src/app/_models/member';
+import { MembersService } from 'src/app/_services/members.service';
 
 @Component({
   selector: 'app-member-detail',
@@ -7,9 +10,35 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MemberDetailComponent implements OnInit {
 
-  constructor() { }
+  member: Member | undefined;
+
+  constructor(
+    private memberService: MembersService,
+    private route: ActivatedRoute, //Para poder acceder al parametro de la url
+  ) { }
 
   ngOnInit(): void {
+    this.loadMember();
+  }
+
+  loadMember(){
+
+    //Obtener el username enviado por la url /members/:username
+    const username = this.route.snapshot.paramMap.get('username');
+
+    if(!username) return;
+
+    this.memberService.getMember(username).subscribe({
+      next: member => {
+        this.member = member;
+      }
+    })
+
+
+
+
+
+
   }
 
 }
